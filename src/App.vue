@@ -1,14 +1,19 @@
 <template>
   <div id="app">
+    <nav id="nav">
+      <router-link to="/">Товары</router-link>
+      <router-link to="/cart">Корзина</router-link>
+      <router-link to="/favourites">Избранное</router-link>
+    </nav>
+    <router-view />
   </div>
 </template>
 
 <script>
-
 export default {
   name: "App",
-  components: {
-    Form,
+  created() {
+    this.$store.dispatch("loadProducts");
   },
 };
 </script>
@@ -30,5 +35,10 @@ body,
 
 * {
   box-sizing: border-box;
+}
+
+#nav {
+  display: flex;
+  gap: 10px;
 }
 </style>
