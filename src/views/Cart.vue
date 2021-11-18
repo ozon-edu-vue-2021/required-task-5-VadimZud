@@ -9,7 +9,9 @@
           :product="product"
           class="product"
         ></product-card>
-        <button @click="placeOrder">Оформить</button>
+        <button @click="placeOrder">
+          Оформить на сумму {{ totalCost }}&#8381;
+        </button>
       </template>
       <div v-else>Корзина пуста</div>
     </div>
@@ -30,7 +32,12 @@ export default {
   },
   methods: {
     placeOrder() {
-      alert(`Вы оформили заказ на сумму ${this.totalCost} рублей`);
+      let message = "Вы заказали:\n";
+      for (let product of this.cart) {
+        message += `${product.dish} - ${product.cost} руб. x ${product.cartCount}\n`;
+      }
+      message += `На общую сумму: ${this.totalCost} руб.`;
+      alert(message);
     },
   },
 };
